@@ -3,11 +3,14 @@
 
 using namespace std;
 
-	void remplirtab (int (&tabl)[8], int &taille);
-	void remplirvec (vector<int> &vec, int &taille);
-	int presenttab (int tab[8], int taille);
-	int presentvec (vector<int> vec, int tail);
-	void celltest (vector<int> &vec,vector<int> &vec2,int tab[8],int tail);
+	void remplirtab (int (&tabl)[8], int &taille);   //  rempli la regle de l'automaton 
+	void remplirvec (vector<int> &vec, int &taille); // rempli une table; il est preferable qu'elle ne soit pas trop grande (min5/max10)
+	int presenttab (int tab[8], int taille);   // presente la regle
+	int presentvec (vector<int> vec, int tail); // affiche les tables transformé
+	void celltest (vector<int> &vec,vector<int> &vec2,int tab[8],int tail); // fais le test et transforme.
+
+
+
 int main () {
 	vector<int> v1(10);
 	vector<int> v2(10);
@@ -20,7 +23,7 @@ int main () {
 	cout<<endl;
 	presentvec(v1,tail2);
 	cout<<endl;
-    while (v==2){celltest(v1,v2, reg, tail2);
+    while (v==2){celltest(v1,v2, reg, tail2); // tant que l'on tape 2 à la fin des 6 lignes présentés, il répétera l'opération
 
 
 
@@ -30,6 +33,17 @@ int main () {
     cout<<endl;
     celltest(v2,v1, reg, tail2);
     presentvec(v1,tail2);
+
+    presentvec(v2,tail2);
+    cout<<endl;
+    celltest(v2,v1, reg, tail2);
+    presentvec(v1,tail2);
+
+    presentvec(v2,tail2);
+    cout<<endl;
+    celltest(v2,v1, reg, tail2);
+    presentvec(v1,tail2);
+
     cin>>v;}
 
      }
@@ -95,7 +109,7 @@ int presentvec (vector<int> vec, int tail) {
 
 
 
-void celltest (vector<int> &vec,vector<int> &vec2,int tab[8],int tail) {
+void celltest (vector<int> &vec,vector<int> &vec2,int tab[8],int tail) {   // il aurait été préférable de voir quelle règle appliquée avec 8 if, mais j'ai préféré séparé en deux. 
 
 	int i;
 
@@ -115,5 +129,4 @@ for ( i=0; i < tail; i++) {
 
 }
 }
-
 
