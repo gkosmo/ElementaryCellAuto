@@ -1,6 +1,10 @@
 #include <vector>
 #include <iostream>
 
+
+// Il n'existe pas de version francaise pour expliquer ce programme, mais vous pouvez regardé sur la page anglaise: http://en.wikipedia.org/wiki/Elementary_cellular_automaton
+
+
 using namespace std;
 
 	void remplirtab (int (&tabl)[8], int &taille);   //  rempli la regle de l'automaton 
