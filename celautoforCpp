@@ -5,8 +5,6 @@ using namespace std;
 
 
 
-// Je ne connais pas de référence francophone pour le "cellular aumota", 
-// néanmoins voici la référence anglaise: http://en.wikipedia.org/wiki/Elementary_cellular_automaton 
 // le programme écrit ici propose a l'utilisateur d'entrer une regle, entrer une ligne
 // et faire le test sur cette ligne pour en constituer un tableau enregistrable
 // Il me reste à manier des tableaux 3d, pour mettre dans un tableau certains tableaux associé à une règle
