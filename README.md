@@ -1,6 +1,6 @@
 # ElementaryCellAuto
 
- Ce programme consiste à répliquer des automaes cellulaires élémentaires. 
+ Ce programme consiste à répliquer des automates cellulaires élémentaires. 
 
 Voici une description. 
 
