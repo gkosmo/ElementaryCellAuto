@@ -1,13 +1,13 @@
 #include <iostream>
 #include <fstream>
+#include <cstdio>
 
 using namespace std;
 
 
 
-// le programme écrit ici propose a l'utilisateur d'entrer une regle, entrer une ligne
-// et faire le test sur cette ligne pour en constituer un tableau enregistrable
-// Il me reste à manier des tableaux 3d, pour mettre dans un tableau certains tableaux associé à une règle
+// Je ne connais pas de référence francophone pour le "cellular aumota", néanmoins voici la référence anglaise: http://en.wikipedia.org/wiki/Elementary_cellular_automaton
+//le programme écrit ici propose a l'utilisateur d'entrer une regle, entrer une ligne et faire le test sur cette ligne pour en constituer un tableau enregistrable.Ceci est un résultat pratique du cours de programmation algorithmique. George Kosmopoulos
 
 
 
@@ -24,10 +24,10 @@ using namespace std;
     void cf2d (int tab2d[10][8], int rowc);/* cree un fichier dans le quel est ecrit une table CA*/
     void remplitab2d ( int tab2d[10][8], int tab1[8], int &rowc);/* rempli une ligne dans une table*/
     void presentab2d (int tab2d[10][8], int  rowc);/* presente une table*/
-    void tab2dfi();/* presente une table dans un fichier*/
-    void tab2dtst (int tab2d[10][8],int reg[8], int tail, int tab1[8], int &rowc );/* rempli une table CA */    
+    void tab2dfi(int tryl[10][8]);/* presente une table dans un fichier*/
+    void tab2dtst (int tab2d[10][8],int reg[8], int tail, int tab1[8], int &rowc );/* rempli une table CA */
     int menu(); /*presente les choix */
-  
+
 
     int main () {
 
@@ -36,6 +36,7 @@ using namespace std;
      int tail, rowc;
      int tab2d[10][8];
      int choice;
+
         while(choice != 0) {
             choice = menu();
             switch(choice) {
@@ -53,12 +54,14 @@ using namespace std;
                     cf2d(tab2d, rowc);
                     break;
                 case 5:
-                    tab2dfi();
+                    tab2dfi(tab2d);
+                    cout << " and for the tryl " << endl;
+
                     break;
-		case 6:
+        case 6:
                      presentab2d(tab2d,rowc);
                      break;
-                
+
                 case 0:
                      break;
             default:
@@ -71,12 +74,14 @@ using namespace std;
 }
 
 
-void tab2dfi() {
+void tab2dfi(int tryl[10][8]) {
     fstream inFile;
     string fi;
+    int  d = 0;
     cout << "tab in file, entrez le fichier" << endl << endl;
     cin >> fi;
     int number = 1;
+    int p[8];
     string line;
     inFile.open(fi.c_str(), ios::in);
     if(!inFile) {
@@ -84,8 +89,16 @@ void tab2dfi() {
     }
     getline(inFile, line);
     while (!inFile.eof()) {
+        for (int i=0; line[i];++i){
+          p[i] = (int(line[i]))%48;
+
+          cout << line[i]<<endl;
+        }
+        remplitab2d (tryl,p,d);
+        presenttab (p, 8);
         cout << number << ". " << line
                      << endl;
+
                 ++number;
                 getline(inFile, line);
     }
@@ -117,11 +130,11 @@ void cf2d (int tab2d[10][8], int rowc){
 
             for ( i=0; i<rowc; i++){
             for(j=0; j < 8 ; j++){
-	        ceatf << tab2d[i][j];
+            ceatf << tab2d[i][j];
              }
-	        ceatf << endl;
+            ceatf << endl;
         }
-		  ceatf.close();
+          ceatf.close();
 
 }
 
@@ -193,9 +206,9 @@ void celltest (int tab1[8],int tab2[8],int reg[8],int tail){
     int i;
     int p;
         for ( i=0; i < tail; i++) {
-	    p=tab1[(i-1+tail)%tail]*4+tab1[i]*2+tab1[(i+1)%tail]*1;
-	    tab2[i]=reg[p];	
-	}
+        p=tab1[(i-1+tail)%tail]*4+tab1[i]*2+tab1[(i+1)%tail]*1;
+        tab2[i]=reg[p];
+    }
 }
 
 
@@ -204,12 +217,12 @@ void tab2dtst (int tab2d[10][8],int reg[8], int tail, int tab1[8], int &rowc)
   int tab2[8];
   int i;
   rowc = 0;
-	   for ( i=0; i < 5; i++) {
-	remplitab2d(tab2d,tab1, rowc);
-	celltest(tab1, tab2, reg, tail);
-	remplitab2d(tab2d,tab2, rowc);
-	celltest(tab2, tab1, reg, tail);
-	 }
+       for ( i=0; i < 5; i++) {
+    remplitab2d(tab2d,tab1, rowc);
+    celltest(tab1, tab2, reg, tail);
+    remplitab2d(tab2d,tab2, rowc);
+    celltest(tab2, tab1, reg, tail);
+     }
 }
 
 
@@ -221,7 +234,7 @@ int menu() {
     cout << "2. Creer une ligne" << endl;
     cout << " 3. Creer un tableau" <<endl;
     cout << "4. Enregistrer un tableau dans un fichier"<<endl;
-    cout << "5. Lire un tableau d'un fichier "<<endl;      
+    cout << "5. Lire un tableau d'un fichier "<<endl;
     cout << "6. presente le tableau en travail " << endl;
     cout << endl;
     cout << "Enter a choice: ";
